@@ -7,7 +7,7 @@
 }
 
 .description {
-  display: inherit;
+  display: block;
   justify-content: inherit;
   align-items: inherit;
   font-size: 0.85rem;

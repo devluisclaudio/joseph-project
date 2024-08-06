@@ -13,7 +13,12 @@ import SvgIcon from "@mui/material/SvgIcon";
 import { Typography } from "@mui/material";
 import styles from "./sidebar.module.css";
 
-export default function Sidebar({ openMenu, onClose }: any) {
+interface iSidebar {
+  openMenu: boolean;
+  onClose: (bool: boolean) => void;
+}
+
+export default function Sidebar({ openMenu, onClose }: iSidebar) {
   const drawerWidth = 240;
   const [itemSelected, setItemSelected] = React.useState(0);
   const listMenu = [

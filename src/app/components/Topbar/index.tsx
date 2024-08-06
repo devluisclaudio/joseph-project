@@ -1,4 +1,3 @@
-"use client";
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,14 +16,13 @@ declare module "@mui/material/AppBar" {
   }
 }
 
-export default function Topbar() {
-  const [open, setOpen] = React.useState(true);
-  const drawerWidth = 240;
+interface iTopbar {
+  open: boolean;
+  drawerWidth: number;
+  toggleDrawer: (bool: boolean) => void;
+}
 
-  const toggleDrawer = (newOpen: boolean) => {
-    console.log(newOpen);
-    setOpen(newOpen);
-  };
+export default function Topbar({open, drawerWidth, toggleDrawer}: iTopbar) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
