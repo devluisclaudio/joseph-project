@@ -7,34 +7,57 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
+import WidgetsIcon from "@mui/icons-material/Widgets";
+import Logo from "@/app/assets/logo.svg";
+import SvgIcon from "@mui/material/SvgIcon";
+import { Typography } from "@mui/material";
+import styles from "./sidebar.module.css";
 
 export default function Sidebar({ openMenu, onClose }: any) {
   const drawerWidth = 240;
+  const [itemSelected, setItemSelected] = React.useState(0);
+  const listMenu = [
+    {
+      name: "Dashboard",
+      icon: true,
+    },
+    {
+      name: "Menu 1",
+      icon: false,
+    },
+    {
+      name: "Menu 2",
+      icon: false,
+    },
+  ];
   const DrawerList = (
-    <Box sx={{ width: 250 }} role="presentation" onClick={() => onClose(false)}>
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
+    <Box sx={{ width: 240 }} role="presentation" onClick={() => onClose(false)}>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{
+          flexGrow: 1,
+          textAlign: "center",
+          padding: 2,
+          fontFamily: "inter",
+        }}
+      >
+        <SvgIcon component={Logo} sx={{width: 19, alignSelf: 'center'}}/>
+        Joseph Project
+      </Typography>
       <Divider />
       <List>
-        {["All mail", "Trash", "Spam"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+        {listMenu.map((item, index) => (
+          <ListItem
+            key={index}
+            disablePadding
+            className={itemSelected === index ? styles.selected : styles.list}
+          >
+            <ListItemButton onClick={() => setItemSelected(index)}>
+              <ListItemIcon sx={{ minWidth: 28 }}>
+                {item.icon && <WidgetsIcon />}
               </ListItemIcon>
-              <ListItemText primary={text} />
+              <ListItemText primary={item.name} />
             </ListItemButton>
           </ListItem>
         ))}
@@ -53,6 +76,9 @@ export default function Sidebar({ openMenu, onClose }: any) {
           flexShrink: 0,
           "& .MuiDrawer-paper": {
             width: drawerWidth,
+            backgroundColor: "#00183C",
+            color: "#fff",
+            overflow: "hidden",
           },
         }}
       >

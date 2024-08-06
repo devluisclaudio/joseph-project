@@ -18,7 +18,7 @@ declare module "@mui/material/AppBar" {
 }
 
 export default function Topbar() {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = React.useState(true);
   const drawerWidth = 240;
 
   const toggleDrawer = (newOpen: boolean) => {

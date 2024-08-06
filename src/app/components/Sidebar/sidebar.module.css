@@ -1,0 +1,17 @@
+.selected {
+    background-color: #96EC3F;
+    margin-inline: auto;
+    width: 90%;
+    border-radius: 5px;
+}
+
+.selected span{
+    color: #00183C;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+.list{
+    margin-inline: auto;
+    width: 90%;
+}
