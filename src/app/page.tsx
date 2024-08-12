@@ -1,10 +1,12 @@
 "use client";
 import Topbar from "@/app/components/Topbar";
 import styles from "./page.module.css";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 import React from "react";
 import MenuIconLabel from "./components/MenuIconLabel";
-import InputSelect from "./components/InputSelect";
+import LabelTopHome from "./components/LabelTopHome";
+import LabelBotsHome from "./components/LabelBotsHome";
+import CardsBots from "./components/CardsBots";
 
 export default function Home() {
   const [open, setOpen] = React.useState(true);
@@ -33,22 +35,9 @@ export default function Home() {
           }}
         >
           <MenuIconLabel />
-          <Typography
-            variant="h6"
-            component="div"
-            sx={{
-              flexGrow: 1,
-              textAlign: "left",
-              paddingInline: 2,
-              fontSize: 20,
-              fontWeight: 600,
-              lineHeight: "29.05px",
-              color: "#4D4D4D",
-            }}
-          >
-            Dashboard
-          </Typography>
-          <InputSelect />
+          <LabelTopHome />
+          <LabelBotsHome />
+          <CardsBots />
         </Box>
       </div>
     </main>
