@@ -8,6 +8,9 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import WidgetsIcon from "@mui/icons-material/Widgets";
+import SettingsIcon from '@mui/icons-material/Settings';
+import StorageIcon from '@mui/icons-material/Storage';
+import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
 import Logo from "@/app/assets/logo.svg";
 import SvgIcon from "@mui/material/SvgIcon";
 import { Typography } from "@mui/material";
@@ -24,15 +27,19 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
   const listMenu = [
     {
       name: "Dashboard",
-      icon: true,
+      icon: WidgetsIcon,
     },
     {
-      name: "Menu 1",
-      icon: false,
+      name: "Training Dataset A.I",
+      icon: DisplaySettingsIcon,
     },
     {
-      name: "Menu 2",
-      icon: false,
+      name: "API & Data",
+      icon: StorageIcon,
+    },
+    {
+      name: "Settings",
+      icon: SettingsIcon,
     },
   ];
   const DrawerList = (
@@ -44,7 +51,6 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
           flexGrow: 1,
           textAlign: "center",
           padding: 2,
-          fontFamily: "inter",
         }}
       >
         <SvgIcon component={Logo} sx={{width: 19, alignSelf: 'center'}}/>
@@ -60,7 +66,7 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
           >
             <ListItemButton onClick={() => setItemSelected(index)}>
               <ListItemIcon sx={{ minWidth: 28 }}>
-                {item.icon && <WidgetsIcon />}
+              <SvgIcon component={item.icon} sx={{width: 19, alignSelf: 'center'}}/>
               </ListItemIcon>
               <ListItemText primary={item.name} />
             </ListItemButton>

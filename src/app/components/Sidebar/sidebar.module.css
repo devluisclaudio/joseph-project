@@ -15,3 +15,6 @@
     margin-inline: auto;
     width: 90%;
 }
+.list svg {
+    color: #fff;
+}
