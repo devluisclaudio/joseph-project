@@ -9,10 +9,10 @@ import AgricultureIcon from "@/app/assets/tractor.svg";
 import Link from "next/link";
 export default function CardsBots() {
   const listBots = [
-    { name: "Climate", icon: CloudIcon, link: "/chatbots" },
-    { name: "Drought", icon: DirectionsBoatIcon, link: "/chatbots" },
-    { name: "Logistic", icon: TimelineIcon, link: "/chatbots" },
-    { name: "Agriculture", icon: AgricultureIcon, link: "/chatbots" },
+    { name: "Climate", icon: CloudIcon, link: "/chatbots/climate" },
+    { name: "Drought", icon: DirectionsBoatIcon, link: "/chatbots/drought" },
+    { name: "Logistic", icon: TimelineIcon, link: "/chatbots/logistic" },
+    { name: "Agriculture", icon: AgricultureIcon, link: "/chatbots/agriculture" },
   ];
   return (
     <Grid container spacing={1} sx={{ marginBlock: 3, marginInline: 2 }}>
