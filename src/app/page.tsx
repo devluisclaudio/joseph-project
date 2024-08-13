@@ -7,6 +7,7 @@ import MenuIconLabel from "./components/MenuIconLabel";
 import LabelTopHome from "./components/LabelTopHome";
 import LabelBotsHome from "./components/LabelBotsHome";
 import CardsBots from "./components/CardsBots";
+import BasicBars from "./components/ChartBar";
 
 export default function Home() {
   const [open, setOpen] = React.useState(true);
@@ -36,6 +37,7 @@ export default function Home() {
         >
           <MenuIconLabel />
           <LabelTopHome />
+          <BasicBars />
           <LabelBotsHome />
           <CardsBots />
         </Box>
