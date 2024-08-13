@@ -1,7 +1,14 @@
 import { Box, Paper, Typography } from "@mui/material";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function BodyMensages(props: any) {
+  const scrollRef = React.useRef<any>(null);
+
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [props.messages]);
   return (
     <>
       <Box
@@ -9,10 +16,13 @@ export default function BodyMensages(props: any) {
           width: "100%",
           flexGrow: 1,
           minHeight: "70vh",
+          maxHeight: "72vh",
           background: "#4d4d4d25",
+          overflowY: "scroll",
           borderRadius: 10,
           marginTop: 3,
         }}
+        ref={scrollRef}
       >
         {props.messages.length &&
           props.messages.map((item: any, index: number) => (

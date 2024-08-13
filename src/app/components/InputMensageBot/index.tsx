@@ -1,4 +1,5 @@
 import {
+  CircularProgress,
   FormControl,
   IconButton,
   Input,
@@ -6,13 +7,17 @@ import {
   InputLabel,
 } from "@mui/material";
 import SendIcon from "@mui/icons-material/Send";
-import { text } from "stream/consumers";
 import React from "react";
 
 export default function InformationsHome(props: any) {
   const [prompt, setPrompt] = React.useState("");
+  const [loading, setLoading] = React.useState(false);
   function handleMouseDownPassword() {
-    props.handleClick(prompt).then(() => setPrompt(""));
+    setLoading(true);
+    props.handleClick(prompt).then(() => {
+      setPrompt("");
+      setLoading(false);
+    });
   }
   return (
     <FormControl sx={{ m: 1, width: "80%" }} variant="standard">
@@ -27,12 +32,16 @@ export default function InformationsHome(props: any) {
         }}
         endAdornment={
           <InputAdornment position="end">
-            <IconButton
-              aria-label="toggle password visibility"
-              onClick={handleMouseDownPassword}
-            >
-              <SendIcon />
-            </IconButton>
+            {loading ? (
+              <CircularProgress color="primary" />
+            ) : (
+              <IconButton
+                aria-label="toggle password visibility"
+                onClick={handleMouseDownPassword}
+              >
+                <SendIcon />
+              </IconButton>
+            )}
           </InputAdornment>
         }
       />
