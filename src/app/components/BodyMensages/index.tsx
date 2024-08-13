@@ -15,11 +15,12 @@ export default function BodyMensages(props: any) {
         }}
       >
         {props.messages.length &&
-          props.messages.map((item: any) => (
+          props.messages.map((item: any, index: number) => (
             <Box
               display="flex"
               justifyContent={item.isMine ? "flex-end" : "flex-start"}
               margin={2}
+              key={index}
             >
               <Paper
                 elevation={2}

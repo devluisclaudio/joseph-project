@@ -72,8 +72,8 @@ export default function CardsImpacts() {
         >
           Impacts
         </Typography>
-        {infos.map((item: any) => (
-          <CardItemIpact dataSet={item} key={item.name} />
+        {infos.map((item: any, index: number) => (
+          <CardItemIpact dataSet={item} key={index} />
         ))}
       </CardContent>
     </Card>
