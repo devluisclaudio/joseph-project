@@ -37,13 +37,14 @@ export default function BasicBars() {
     return [{ data: [obj.media] }];
   });
 
-  const medias = tempmedias[0]
+  const medias = tempmedias[0];
 
-  console.log(medias)
+  console.log(medias);
   return (
     <BarChart
-      xAxis={[{ scaleType: "band", data: years }]}
-      series={medias}
+      dataset={data}
+      xAxis={[{ scaleType: "band", dataKey: 'ano' }]}
+      series={[{dataKey: 'media'}]}
       width={500}
       height={300}
     />
