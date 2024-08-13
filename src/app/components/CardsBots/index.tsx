@@ -2,10 +2,10 @@ import { Grid, SvgIcon } from "@mui/material";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Typography from "@mui/material/Typography";
-import CloudIcon from "@mui/icons-material/Cloud";
-import DirectionsBoatIcon from "@mui/icons-material/DirectionsBoat";
-import TimelineIcon from "@mui/icons-material/Timeline";
-import AgricultureIcon from "@mui/icons-material/Agriculture";
+import CloudIcon from "@/app/assets/cloud.svg";
+import DirectionsBoatIcon from "@/app/assets/drought.svg";
+import TimelineIcon from "@/app/assets/logisticbot.svg";
+import AgricultureIcon from "@/app/assets/tractor.svg";
 export default function CardsBots() {
   const listBots = [
     { name: "Climate", icon: CloudIcon },
@@ -36,7 +36,8 @@ export default function CardsBots() {
               </Typography>
               <SvgIcon
                 component={item.icon}
-                sx={{ width: '100%', alignSelf: "center", color: "#96EC3F", fontSize: 100 }}
+                viewBox="0 0 120 120"
+                sx={{ width: '100%', alignSelf: "center", fontSize: 100, color: '#fff' }}
               />
             </CardContent>
           </Card>
