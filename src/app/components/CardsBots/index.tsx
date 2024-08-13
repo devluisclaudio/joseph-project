@@ -17,7 +17,7 @@ export default function CardsBots() {
   return (
     <Grid container spacing={1} sx={{ marginBlock: 3, marginInline: 2 }}>
       {listBots.map((item, index) => (
-        <Grid item xs={3} md={3} key={index}>
+        <Grid item xs='auto' md={3} key={index} sm={10}>
           <Link href={item.link}>
             <Card sx={{ minWidth: 275, maxWidth: 375 }}>
               <CardContent>

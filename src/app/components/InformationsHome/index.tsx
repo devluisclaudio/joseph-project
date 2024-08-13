@@ -6,13 +6,13 @@ import NewsFeature from "../NewsFeature";
 export default function InformationsHome() {
   return (
     <Grid container spacing={3} sx={{ marginBlock: 3, marginInline: 2 }}>
-      <Grid xs={4} md={4}>
+      <Grid xs='auto' md={4} sm={12}>
         <BasicBars />
       </Grid>
-      <Grid xs={4} md={4}>
+      <Grid xs='auto' md={4}sm={12}>
         <CardsImpacts />
       </Grid>
-      <Grid xs={4} md={4}>
+      <Grid xs='auto' md={4} sm={12}>
         <NewsFeature />
       </Grid>
     </Grid>

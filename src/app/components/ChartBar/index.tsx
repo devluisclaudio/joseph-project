@@ -13,7 +13,7 @@ export default function BasicBars() {
       dataset={values}
       xAxis={[{ scaleType: "band", dataKey: "ano" }]}
       series={[{ dataKey: "media",  label: 'Stress Levels' }]}
-      width={500}
+      width={400}
       height={300}
       borderRadius={10}
     />
