@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'http://api.josephproject.com.br:3001/',
+  baseURL: 'http://api.josephproject.com.br/',
   timeout: 10000, 
 });
 

@@ -2,7 +2,7 @@ import axios from 'axios';
 
 const ia = axios.create({
   baseURL: 'https://stec.cx',
-  timeout: 10000, 
+  timeout: 100000, 
 });
 
 ia.interceptors.request.use(

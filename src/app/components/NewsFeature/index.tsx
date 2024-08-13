@@ -4,22 +4,9 @@ import React from "react";
 import gemini from "@/app/services/gemini";
 
 export default function NewsFeature() {
-  const htmlMock = `html
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Previsão Climática: Amazônia em 2024</title>
-</head>
-<body>
-  <h1>Previsão Climática: Amazônia em 2024</h1>
-  <h2>Risco de Seca Agravada e Impactos Socioambientais</h2>
-  <p>Modelos climáticos indicam que a Amazônia enfrenta um risco elevado de seca severa no final de 2024, com impactos significativos para a região. A combinação de eventos climáticos extremos, como o El Niño, e o desmatamento crescente, aumentam a probabilidade de um período de estiagem prolongado. As consequências para a região são preocupantes, incluindo a intensificação de incêndios florestais, redução da vazão dos rios, perda de biodiversidade e impactos socioeconômicos, como a redução da produção agrícola e o aumento da insegurança alimentar.</p>
-</body>
-</html>
-`;
   function extractClimateData(htmlString: string) {
     const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = htmlString.replace("```", "");
+    tempDiv.innerHTML = htmlString.replace(/```/g, "");
 
     // Extrai os dados necessários
     const title = tempDiv.querySelector("h1")?.innerText || "";
@@ -36,10 +23,9 @@ export default function NewsFeature() {
   const [dataSetGemini, setDataSetGemini] = React.useState<any>(null);
 
   React.useEffect(() => {
-    // gemini.newsGemini().then(({ data }) => {
-       
-    // });
-    setDataSetGemini(extractClimateData(htmlMock))
+    gemini.newsGemini().then(({ data }) => {
+      setDataSetGemini(extractClimateData(data));
+    });
   }, []);
 
   return (

@@ -6,40 +6,52 @@ import imageLogistic from "@/app/assets/logistic.svg";
 import React from "react";
 import gemini from "@/app/services/gemini";
 
+const data = [
+  {
+    name: "Environmental",
+    image: imageEnvironmental,
+    percent: 74,
+  },
+  {
+    name: "Socioeconomic",
+    image: imageSocioeconomic,
+    percent: 52,
+  },
+  {
+    name: "Logistic",
+    image: imageLogistic,
+    percent: 36,
+  },
+];
+
 export default function CardsImpacts() {
-  const [dataSetGemini, setDataSetGemini] = React.useState([]);
+  const [dataSetGemini, setDataSetGemini] = React.useState<any>([]);
+  const [infos, setInfos] = React.useState<any>(data);
   function jsonToArray(jsonString: string) {
     // Converte a string JSON em um array de objetos
-    const data = JSON.parse(jsonString.replace("json", ""));
+    const data = JSON.parse(jsonString.replace("json", "").replace(/```/g, ""));
 
     // Mapeia os objetos para extrair os valores de "percent"
     const result = data.map((item: any) => item.percent);
 
     return result;
   }
-  const data = [
-    {
-      name: "Environmental",
-      image: imageEnvironmental,
-      percent: 74,
-    },
-    {
-      name: "Socioeconomic",
-      image: imageSocioeconomic,
-      percent: 52,
-    },
-    {
-      name: "Logistic",
-      image: imageLogistic,
-      percent: 36,
-    },
-  ];
 
   React.useEffect(() => {
+    if (!dataSetGemini.length)
     gemini.percentImpacts().then(({ data }) => {
-      console.log(jsonToArray(data));
+      setDataSetGemini(jsonToArray(data));
     });
   }, []);
+  React.useEffect(() => {
+    if (dataSetGemini.length) {
+      const array = data.map((item, index) => {
+        item.percent = dataSetGemini[index];
+        return item;
+      });
+      setInfos(array);
+    }
+  }, [dataSetGemini]);
 
   return (
     <Card sx={{ minWidth: 275, maxWidth: 375 }}>
@@ -60,7 +72,7 @@ export default function CardsImpacts() {
         >
           Impacts
         </Typography>
-        {data.map((item) => (
+        {infos.map((item: any) => (
           <CardItemIpact dataSet={item} key={item.name} />
         ))}
       </CardContent>
