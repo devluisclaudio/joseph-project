@@ -12,7 +12,7 @@ export default function BasicBars() {
     <BarChart
       dataset={values}
       xAxis={[{ scaleType: "band", dataKey: "ano" }]}
-      series={[{ dataKey: "media",  label: 'Street Levels' }]}
+      series={[{ dataKey: "media",  label: 'Stress Levels' }]}
       width={500}
       height={300}
       borderRadius={10}
