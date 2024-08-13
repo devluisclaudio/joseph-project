@@ -14,6 +14,13 @@ const gemini = {
         clientid: 987,
         prompt: `como dados que voce tem na seu treinamento, retorne uma noticia prevista para o final de 2024 na amazonia em formato de html com titulo, subtitulo e um paragrafo resumido relacionando aos impactos na região traduzido para o ingles`,
       });
+  },
+  chatGemini: (prompt: string) =>{
+    return ia.post("api/joseph.php", {
+        stec_APIKEY: "lfs01",
+        clientid: 987,
+        prompt,
+      });
   }
 };
 
