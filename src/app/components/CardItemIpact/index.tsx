@@ -1,4 +1,4 @@
-import { Box, CardContent, Stack, SvgIcon, Typography } from "@mui/material";
+import { Box, CardContent, Stack, Typography } from "@mui/material";
 import LinearProgress, {
   linearProgressClasses,
   LinearProgressProps,
@@ -49,12 +49,12 @@ export default function CardItemIpact(props: iProps) {
 
   return (
     <Box sx={{ display: "flex" }}>
-      <SvgIcon
-        component={props.dataSet.image}
-        sx={{
-          width: 45,
-          alignSelf: "left",
-        }}
+      <img
+        src={props.dataSet.image.src}
+        alt={props.dataSet.name}
+        loading="lazy"
+        width={45}
+        height={37}
       />
       <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
         <CardContent sx={{ flex: "1 auto", paddingBlock: 0 }}>

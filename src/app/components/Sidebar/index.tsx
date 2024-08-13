@@ -8,13 +8,14 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import WidgetsIcon from "@mui/icons-material/Widgets";
-import SettingsIcon from '@mui/icons-material/Settings';
-import StorageIcon from '@mui/icons-material/Storage';
-import DisplaySettingsIcon from '@mui/icons-material/DisplaySettings';
+import SettingsIcon from "@mui/icons-material/Settings";
+import StorageIcon from "@mui/icons-material/Storage";
+import DisplaySettingsIcon from "@mui/icons-material/DisplaySettings";
 import Logo from "@/app/assets/logo.svg";
 import SvgIcon from "@mui/material/SvgIcon";
 import { Typography } from "@mui/material";
 import styles from "./sidebar.module.css";
+import Link from "next/link";
 
 interface iSidebar {
   openMenu: boolean;
@@ -28,22 +29,22 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
     {
       name: "Dashboard",
       icon: WidgetsIcon,
-      link: ''
+      link: "/",
     },
     {
       name: "Training Dataset A.I",
       icon: DisplaySettingsIcon,
-      link: 'https://trainingai.josephproject.com.br'
+      link: "https://trainingai.josephproject.com.br",
     },
     {
       name: "API & Data",
       icon: StorageIcon,
-      link: ''
+      link: "/",
     },
     {
       name: "Settings",
       icon: SettingsIcon,
-      link: ''
+      link: "/",
     },
   ];
   const DrawerList = (
@@ -57,7 +58,7 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
           padding: 2,
         }}
       >
-        <SvgIcon component={Logo} sx={{width: 19, alignSelf: 'center'}}/>
+        <SvgIcon component={Logo} sx={{ width: 19, alignSelf: "center" }} />
         Joseph Project
       </Typography>
       <Divider />
@@ -68,12 +69,17 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
             disablePadding
             className={itemSelected === index ? styles.selected : styles.list}
           >
-            <ListItemButton onClick={() => !item.link ? setItemSelected(index): window.open(item.link, '_blank')}>
-              <ListItemIcon sx={{ minWidth: 28 }}>
-              <SvgIcon component={item.icon} sx={{width: 19, alignSelf: 'center'}}/>
-              </ListItemIcon>
-              <ListItemText primary={item.name} />
-            </ListItemButton>
+            <Link href={item.link}>
+              <ListItemButton>
+                <ListItemIcon sx={{ minWidth: 28 }}>
+                  <SvgIcon
+                    component={item.icon}
+                    sx={{ width: 19, alignSelf: "center" }}
+                  />
+                </ListItemIcon>
+                <ListItemText primary={item.name} />
+              </ListItemButton>
+            </Link>
           </ListItem>
         ))}
       </List>

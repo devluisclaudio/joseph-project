@@ -1,8 +1,8 @@
 import { Card, CardContent, Typography } from "@mui/material";
 import CardItemIpact from "../CardItemIpact";
-import imageSocioeconomic from "@/app/assets/socioeconimic.svg";
-import imageEnvironmental from "@/app/assets/environmental.svg";
-import imageLogistic from "@/app/assets/logistic.svg";
+import imageSocioeconomic from "@/app/assets/socioeconimic.jpeg";
+import imageEnvironmental from "@/app/assets/environmental.jpg";
+import imageLogistic from "@/app/assets/logistic.jpeg";
 import React from "react";
 import gemini from "@/app/services/gemini";
 

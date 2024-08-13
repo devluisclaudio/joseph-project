@@ -14,7 +14,6 @@ export default function Home() {
   const drawerWidth = 240;
 
   const toggleDrawer = (newOpen: boolean) => {
-    console.log(newOpen);
     setOpen(newOpen);
   };
 
