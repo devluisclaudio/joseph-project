@@ -13,7 +13,7 @@ export default function CardsImpacts() {
     const data = JSON.parse(jsonString.replace("json", ""));
 
     // Mapeia os objetos para extrair os valores de "percent"
-    const result = data.map((item) => item.percent);
+    const result = data.map((item: any) => item.percent);
 
     return result;
   }
@@ -36,7 +36,7 @@ export default function CardsImpacts() {
   ];
 
   React.useEffect(() => {
-    gemini.percentImpacts(({ data }) => {
+    gemini.percentImpacts().then(({ data }) => {
       console.log(jsonToArray(data));
     });
   }, []);
