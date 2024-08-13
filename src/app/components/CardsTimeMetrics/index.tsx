@@ -16,20 +16,20 @@ interface Data {
 export default function CardsTimeMetrics() {
   const [values, setValues] = React.useState<Data[]>([]);
   React.useEffect(() => {
-    const fetchData = async () => {
-        try {
-          const response = await  service.cards();
-          const arrayData = Object.entries(response.data).map(([year, values]) => ({
-            year,
-            ...values,
-          }));
-          setValues(arrayData)
-        } catch (err) {
-          console.debug('Erro ao buscar dados');
-        } 
-      };
+    // const fetchData = async () => {
+    //     try {
+    //       const response = await  service.cards();
+    //       const arrayData = Object.entries(response.data).map(([year, values]) => ({
+    //         year,
+    //         ...values,
+    //       }));
+    //       setValues(arrayData)
+    //     } catch (err) {
+    //       console.debug('Erro ao buscar dados');
+    //     } 
+    //   };
   
-      fetchData();
+    //   fetchData();
   }, []);
 
   return (
