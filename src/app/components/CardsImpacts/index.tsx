@@ -3,8 +3,20 @@ import CardItemIpact from "../CardItemIpact";
 import imageSocioeconomic from "@/app/assets/socioeconimic.svg";
 import imageEnvironmental from "@/app/assets/environmental.svg";
 import imageLogistic from "@/app/assets/logistic.svg";
+import React from "react";
+import gemini from "@/app/services/gemini";
 
 export default function CardsImpacts() {
+  const [dataSetGemini, setDataSetGemini] = React.useState([]);
+  function jsonToArray(jsonString: string) {
+    // Converte a string JSON em um array de objetos
+    const data = JSON.parse(jsonString.replace("json", ""));
+
+    // Mapeia os objetos para extrair os valores de "percent"
+    const result = data.map((item) => item.percent);
+
+    return result;
+  }
   const data = [
     {
       name: "Environmental",
@@ -22,6 +34,13 @@ export default function CardsImpacts() {
       percent: 36,
     },
   ];
+
+  React.useEffect(() => {
+    gemini.percentImpacts(({ data }) => {
+      console.log(jsonToArray(data));
+    });
+  }, []);
+
   return (
     <Card sx={{ minWidth: 275, maxWidth: 375 }}>
       <CardContent>
@@ -36,7 +55,7 @@ export default function CardsImpacts() {
             fontWeight: 600,
             lineHeight: "29.05px",
             color: "#4D4D4D",
-            marginBottom: 2
+            marginBottom: 2,
           }}
         >
           Impacts
