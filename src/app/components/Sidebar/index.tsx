@@ -28,18 +28,22 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
     {
       name: "Dashboard",
       icon: WidgetsIcon,
+      link: ''
     },
     {
       name: "Training Dataset A.I",
       icon: DisplaySettingsIcon,
+      link: 'https://trainingai.josephproject.com.br'
     },
     {
       name: "API & Data",
       icon: StorageIcon,
+      link: ''
     },
     {
       name: "Settings",
       icon: SettingsIcon,
+      link: ''
     },
   ];
   const DrawerList = (
@@ -64,7 +68,7 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
             disablePadding
             className={itemSelected === index ? styles.selected : styles.list}
           >
-            <ListItemButton onClick={() => setItemSelected(index)}>
+            <ListItemButton onClick={() => !item.link ? setItemSelected(index): window.open(item.link, '_blank')}>
               <ListItemIcon sx={{ minWidth: 28 }}>
               <SvgIcon component={item.icon} sx={{width: 19, alignSelf: 'center'}}/>
               </ListItemIcon>

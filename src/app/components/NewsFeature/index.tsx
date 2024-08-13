@@ -1,3 +1,4 @@
+"use client";
 import { Card, CardContent, Typography } from "@mui/material";
 import React from "react";
 import gemini from "@/app/services/gemini";
@@ -17,7 +18,6 @@ export default function NewsFeature() {
 </html>
 `;
   function extractClimateData(htmlString: string) {
-    // Cria um elemento temporário para manipular o HTML
     const tempDiv = document.createElement("div");
     tempDiv.innerHTML = htmlString.replace("```", "");
 
@@ -33,14 +33,13 @@ export default function NewsFeature() {
       text: text,
     };
   }
-  const [dataSetGemini, setDataSetGemini] = React.useState(
-    extractClimateData(htmlMock)
-  );
+  const [dataSetGemini, setDataSetGemini] = React.useState<any>(null);
 
   React.useEffect(() => {
-    gemini.newsGemini().then(({ data }) => {
-      console.log("Opa");
-    });
+    // gemini.newsGemini().then(({ data }) => {
+       
+    // });
+    setDataSetGemini(extractClimateData(htmlMock))
   }, []);
 
   return (
