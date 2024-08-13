@@ -1,5 +1,7 @@
 import { Box, Paper, Typography } from "@mui/material";
 import React, { useEffect } from "react";
+import Markdown from "react-markdown";
+import remarkGfm from 'remark-gfm'
 
 export default function BodyMensages(props: any) {
   const scrollRef = React.useRef<any>(null);
@@ -35,20 +37,18 @@ export default function BodyMensages(props: any) {
               <Paper
                 elevation={2}
                 style={{
-                  padding: "10px",
+                  padding: 5,
                   borderRadius: item.isMine
                     ? "20px 20px 0px 20px"
                     : "20px 20px 20px 0px",
                   backgroundColor: item.isMine ? "#dcf8c6" : "#fff",
-                  maxWidth: "70%",
+                  maxWidth: "80%",
+                 fontFamily: '"Roboto","Helvetica","Arial",sans-serif' 
                 }}
               >
-                <Typography
-                  variant="h5"
-                  sx={{ fontSize: 16, paddingInline: 2 }}
-                >
+                <Markdown remarkPlugins={[[remarkGfm, {singleTilde: false}]]}>
                   {item.message}
-                </Typography>
+                </Markdown>
               </Paper>
             </Box>
           ))}

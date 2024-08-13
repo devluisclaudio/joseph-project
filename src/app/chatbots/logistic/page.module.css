@@ -20,9 +20,11 @@
   position: relative;
   margin: 0;
   padding: 1rem;
-  background-color: rgba(var(--callout-rgb), 0.5);
-  border: 1px solid rgba(var(--callout-border-rgb), 0.3);
   border-radius: var(--border-radius);
+}
+.description ul {
+  margin-inline: 1rem;
+  padding: 1rem;
 }
 
 .code {
