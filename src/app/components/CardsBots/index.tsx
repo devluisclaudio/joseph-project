@@ -7,6 +7,7 @@ import DirectionsBoatIcon from "@/app/assets/drought.svg";
 import TimelineIcon from "@/app/assets/logisticbot.svg";
 import AgricultureIcon from "@/app/assets/tractor.svg";
 import Link from "next/link";
+
 export default function CardsBots() {
   const listBots = [
     { name: "Climate", icon: CloudIcon, link: "/chatbots/climate" },
@@ -14,12 +15,24 @@ export default function CardsBots() {
     { name: "Logistic", icon: TimelineIcon, link: "/chatbots/logistic" },
     { name: "Agriculture", icon: AgricultureIcon, link: "/chatbots/agriculture" },
   ];
+
   return (
-    <Grid container spacing={1} sx={{ marginBlock: 3, marginInline: 2 }}>
+    <Grid container spacing={1} sx={{ marginBlock: 2, marginInline: 0 }}>
       {listBots.map((item, index) => (
         <Grid item xs='auto' md={3} key={index} sm={10}>
           <Link href={item.link}>
-            <Card sx={{ minWidth: 275, maxWidth: 375 }}>
+            <Card
+              sx={{
+                minWidth: 275,
+                maxWidth: 375,
+                transition: "transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
+                borderRadius: 1.5,
+                "&:hover": {
+                  transform: "scale(1.05)",
+                  boxShadow: "0 4px 20px rgba(0, 0, 0, 0.2)",
+                },
+              }}
+            >
               <CardContent>
                 <Typography
                   variant="h5"

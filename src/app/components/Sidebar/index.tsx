@@ -39,13 +39,8 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
     {
       name: "API & Data",
       icon: StorageIcon,
-      link: "/",
-    },
-    {
-      name: "Settings",
-      icon: SettingsIcon,
-      link: "/",
-    },
+      link: "/api-data",
+    }
   ];
   const DrawerList = (
     <Box sx={{ width: 240 }} role="presentation" onClick={() => onClose(false)}>
@@ -56,10 +51,15 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
           flexGrow: 1,
           textAlign: "center",
           padding: 2,
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
         }}
       >
-        <SvgIcon component={Logo} sx={{ width: 19, alignSelf: "center" }} />
-        Joseph Project
+        <Link href="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
+          <SvgIcon component={Logo} sx={{ width: 19, height: 19, marginRight: 1 }} />
+          Joseph Project
+        </Link>
       </Typography>
       <Divider />
       <List>
@@ -69,17 +69,33 @@ export default function Sidebar({ openMenu, onClose }: iSidebar) {
             disablePadding
             className={itemSelected === index ? styles.selected : styles.list}
           >
-            <Link href={item.link}>
-              <ListItemButton>
-                <ListItemIcon sx={{ minWidth: 28 }}>
-                  <SvgIcon
-                    component={item.icon}
-                    sx={{ width: 19, alignSelf: "center" }}
-                  />
-                </ListItemIcon>
-                <ListItemText primary={item.name} />
-              </ListItemButton>
-            </Link>
+            {item.name === "Training Dataset A.I" ? (
+              <Link href={item.link} legacyBehavior>
+                <a target="_blank" rel="noopener noreferrer" style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <ListItemButton>
+                    <ListItemIcon sx={{ minWidth: 28 }}>
+                      <SvgIcon
+                        component={item.icon}
+                        sx={{ width: 19, alignSelf: "center" }}
+                      />
+                    </ListItemIcon>
+                    <ListItemText primary={item.name} />
+                  </ListItemButton>
+                </a>
+              </Link>
+            ) : (
+              <Link href={item.link} style={{ textDecoration: 'none', color: 'inherit' }}>
+                <ListItemButton>
+                  <ListItemIcon sx={{ minWidth: 28 }}>
+                    <SvgIcon
+                      component={item.icon}
+                      sx={{ width: 19, alignSelf: "center" }}
+                    />
+                  </ListItemIcon>
+                  <ListItemText primary={item.name} />
+                </ListItemButton>
+              </Link>
+            )}
           </ListItem>
         ))}
       </List>

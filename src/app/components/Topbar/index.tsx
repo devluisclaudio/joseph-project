@@ -22,7 +22,7 @@ interface iTopbar {
   toggleDrawer: (bool: boolean) => void;
 }
 
-export default function Topbar({open, drawerWidth, toggleDrawer}: iTopbar) {
+export default function Topbar({ open, drawerWidth, toggleDrawer }: iTopbar) {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -57,11 +57,8 @@ export default function Topbar({open, drawerWidth, toggleDrawer}: iTopbar) {
             aria-controls="menu-appbar"
             aria-haspopup="true"
             color="inherit"
-            sx={{ marginRight: 5}}
+            sx={{ marginRight: 5 }}
           >
-            <Badge badgeContent={17} color="error">
-              <NotificationsIcon />
-            </Badge>
           </IconButton>
         </Toolbar>
       </AppBar>

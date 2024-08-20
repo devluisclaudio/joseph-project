@@ -28,12 +28,8 @@ export default function CardsImpacts() {
   const [dataSetGemini, setDataSetGemini] = React.useState<any>([]);
   const [infos, setInfos] = React.useState<any>(data);
   function jsonToArray(jsonString: string) {
-    // Converte a string JSON em um array de objetos
     const data = JSON.parse(jsonString.replace("json", "").replace(/```/g, ""));
-
-    // Mapeia os objetos para extrair os valores de "percent"
     const result = data.map((item: any) => item.percent);
-
     return result;
   }
 
@@ -54,7 +50,7 @@ export default function CardsImpacts() {
   }, [dataSetGemini]);
 
   return (
-    <Card sx={{ minWidth: 275, maxWidth: 375 }}>
+    <Card sx={{ minWidth: 475, maxWidth: 415, height: 345 }}>
       <CardContent>
         <Typography
           variant="h5"
