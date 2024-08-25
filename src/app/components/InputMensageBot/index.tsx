@@ -12,13 +12,23 @@ import React from "react";
 export default function InformationsHome(props: any) {
   const [prompt, setPrompt] = React.useState("");
   const [loading, setLoading] = React.useState(false);
-  function handleMouseDownPassword() {
+
+  function handleSend() {
+    if (prompt.trim() === "") return;
     setLoading(true);
     props.handleClick(prompt).then(() => {
       setPrompt("");
       setLoading(false);
     });
   }
+
+  function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      handleSend();
+    }
+  }
+
   return (
     <FormControl sx={{ m: 1, width: "80%" }} variant="standard">
       <InputLabel htmlFor="send-question">Send your question</InputLabel>
@@ -30,14 +40,15 @@ export default function InformationsHome(props: any) {
         onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
           setPrompt(event.target.value);
         }}
+        onKeyPress={handleKeyPress}
         endAdornment={
           <InputAdornment position="end">
             {loading ? (
               <CircularProgress color="primary" />
             ) : (
               <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleMouseDownPassword}
+                aria-label="send message"
+                onClick={handleSend}
               >
                 <SendIcon />
               </IconButton>
