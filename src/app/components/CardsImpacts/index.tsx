@@ -27,6 +27,8 @@ const data = [
 export default function CardsImpacts() {
   const [dataSetGemini, setDataSetGemini] = React.useState<any>([]);
   const [infos, setInfos] = React.useState<any>(data);
+  const [contextoIa, setContextoIa] = React.useState("");
+
   function jsonToArray(jsonString: string) {
     const data = JSON.parse(jsonString.replace("json", "").replace(/```/g, ""));
     const result = data.map((item: any) => item.percent);
@@ -34,11 +36,18 @@ export default function CardsImpacts() {
   }
 
   React.useEffect(() => {
-    if (!dataSetGemini.length)
-    gemini.percentImpacts().then(({ data }) => {
-      setDataSetGemini(jsonToArray(data));
-    });
+    if (!contextoIa)
+      gemini.loadTrainingData().then((data: string) => setContextoIa(data));
   }, []);
+
+  React.useEffect(() => {
+    if (!dataSetGemini.length)
+      gemini.percentImpacts(contextoIa).then(({ data }) => {
+        const resposta = data.candidates[0].content.parts[0].text || "";
+        setDataSetGemini(jsonToArray(resposta));
+      });
+  }, [contextoIa]);
+
   React.useEffect(() => {
     if (dataSetGemini.length) {
       const array = data.map((item, index) => {

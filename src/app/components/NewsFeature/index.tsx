@@ -21,12 +21,19 @@ export default function NewsFeature() {
     };
   }
   const [dataSetGemini, setDataSetGemini] = React.useState<any>(null);
+  const [contextoIa, setContextoIa] = React.useState("");
 
   React.useEffect(() => {
-    gemini.newsGemini().then(({ data }) => {
-      setDataSetGemini(extractClimateData(data));
-    });
+    if (!contextoIa)
+      gemini.loadTrainingData().then((data: string) => setContextoIa(data));
   }, []);
+
+  React.useEffect(() => {
+    gemini.newsGemini(contextoIa).then(({ data }) => {
+      const resposta = data.candidates[0].content.parts[0].text || "";
+      setDataSetGemini(extractClimateData(resposta));
+    });
+  }, [contextoIa]);
 
   return (
     <Card sx={{ minWidth: 275, maxWidth: 375 }}>

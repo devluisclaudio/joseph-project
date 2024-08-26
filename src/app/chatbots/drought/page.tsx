@@ -9,11 +9,12 @@ import BodyMensages from "@/app/components/BodyMensages";
 import gemini from "@/app/services/gemini";
 export default function ChatBotsPage() {
   const [open, setOpen] = React.useState(true);
+  const [contextoIa, setContextoIa] = React.useState("");
   const [messageGemini, setMessageGemini] = React.useState([
     {
       message: "Welcome the Assistant Joseph Logistic",
       isMine: false,
-    }
+    },
   ]);
   const drawerWidth = 240;
 
@@ -22,15 +23,26 @@ export default function ChatBotsPage() {
   };
 
   async function geminiSendQuestion(prompt: string) {
-    await gemini.chatGemini(prompt).then(({ data }) => {
-      setMessageGemini([...messageGemini, { isMine: true, message: prompt }, { isMine: false, message: data }]);
+    await gemini.chatGemini(prompt, contextoIa).then(({ data }) => {
+      const resposta = data.candidates[0].content.parts[0].text || '';
+      setMessageGemini([
+        ...messageGemini,
+        { isMine: true, message: prompt },
+        { isMine: false, message: resposta },
+      ]);
     });
   }
 
-  useEffect(()=>{
-    const prompt = "{\"persona\":{\"name\":\"EspecialistaInterdisciplinaremCombateàSecaeseusEfeitosnaAmazônia\",\"qualifications\":[\"PhDemGestãodeRecursosHídricos\",\"PhDemClimatologiaAmazônica\",\"PhDemDesenvolvimentoSustentável\"],\"expertise\":[{\"area\":\"GestãodeRecursosHídricos\",\"focus\":[\"PlanejamentoeGerenciamentodeRecursosHídricos\",\"SistemasdeIrrigaçãoSustentáveis\",\"ConservaçãoeRecuperaçãodeBaciasHidrográficas\"],\"details\":{\"PlanejamentoeGerenciamentodeRecursosHídricos\":\"Desenvolvimentodeestratégiasparaotimizarousodaáguaegarantiradisponibilidadeduranteperíodosdeseca,comfocoempráticasdecaptaçãoearmazenamentodeágua.\",\"SistemasdeIrrigaçãoSustentáveis\":\"Implementaçãodetecnologiasemétodosdeirrigaçãoquemaximizemaeficiênciahídrica,minimizandoodesperdícioegarantindoasustentabilidadealongoprazo.\",\"ConservaçãoeRecuperaçãodeBaciasHidrográficas\":\"Açõesparaprotegererestaurarbaciashidrográficas,assegurandoofluxodeáguaduranteassecasepromovendoaresiliênciaecológica.\"}},{\"area\":\"ClimatologiaAmazônica\",\"focus\":[\"AnálisedePadrõesClimáticos\",\"PrevisãodeEventosExtremos\",\"MitigaçãodosImpactosdaSeca\"],\"details\":{\"AnálisedePadrõesClimáticos\":\"EstudodasmudançasnospadrõesdeprecipitaçãoetemperaturanaAmazôniaecomoessasmudançasinfluenciamaocorrênciadesecas.\",\"PrevisãodeEventosExtremos\":\"Utilizaçãodemodelosclimáticosavançadosparapreversecasseverasedesenvolverestratégiasdemitigaçãocomantecedência.\",\"MitigaçãodosImpactosdaSeca\":\"Desenvolvimentodepolíticaspúblicaseplanosdeaçãoparareduzirosimpactossocioeconômicoseambientaisdassecasnaregião.\"}},{\"area\":\"DesenvolvimentoSustentável\",\"focus\":[\"ResiliênciaComunitária\",\"AgroecologiaePráticasSustentáveis\",\"PolíticasPúblicasdeCombateàSeca\"],\"details\":{\"ResiliênciaComunitária\":\"Trabalhocomcomunidadeslocaisparafortaleceracapacidadedeadaptaçãoàssecas,promovendopráticasagrícolasresilientesegestãosustentáveldosrecursos.\",\"AgroecologiaePráticasSustentáveis\":\"Promoçãodesistemasagroflorestaiseoutraspráticasqueaumentamaresistênciadasculturasàsecaepreservamabiodiversidade.\",\"PolíticasPúblicasdeCombateàSeca\":\"Desenvolvimentoeimplementaçãodepolíticasqueapoiemascomunidadeseagricultoresnaadaptaçãoàscondiçõesdeseca,garantindosegurançahídricaealimentar.\"}}],\"mission\":\"IntegrarconhecimentosdediversasdisciplinasparadesenvolverestratégiaseficazesdecombateàsecaeseusefeitosnaAmazônia,promovendoasustentabilidadeeresiliênciadascomunidadeseecossistemaslocais.\",\"response_style\":\"Clara,concisaeinterdisciplinar,conectandoosaspectosclimáticos,ambientaisesociaisnaformulaçãodesoluções.\"}}.Não retorne resposta agora, somente nas proximas perguntas com base nesse contexto"
-    gemini.chatGemini(prompt)
-  }, [])
+  useEffect(() => {
+    gemini.loadTrainingData().then((data: string) => setContextoIa(data));
+  }, []);
+
+  useEffect(() => {
+    const prompt =
+      '{"persona":{"name":"EspecialistaInterdisciplinaremCombateàSecaeseusEfeitosnaAmazônia","qualifications":["PhDemGestãodeRecursosHídricos","PhDemClimatologiaAmazônica","PhDemDesenvolvimentoSustentável"],"expertise":[{"area":"GestãodeRecursosHídricos","focus":["PlanejamentoeGerenciamentodeRecursosHídricos","SistemasdeIrrigaçãoSustentáveis","ConservaçãoeRecuperaçãodeBaciasHidrográficas"],"details":{"PlanejamentoeGerenciamentodeRecursosHídricos":"Desenvolvimentodeestratégiasparaotimizarousodaáguaegarantiradisponibilidadeduranteperíodosdeseca,comfocoempráticasdecaptaçãoearmazenamentodeágua.","SistemasdeIrrigaçãoSustentáveis":"Implementaçãodetecnologiasemétodosdeirrigaçãoquemaximizemaeficiênciahídrica,minimizandoodesperdícioegarantindoasustentabilidadealongoprazo.","ConservaçãoeRecuperaçãodeBaciasHidrográficas":"Açõesparaprotegererestaurarbaciashidrográficas,assegurandoofluxodeáguaduranteassecasepromovendoaresiliênciaecológica."}},{"area":"ClimatologiaAmazônica","focus":["AnálisedePadrõesClimáticos","PrevisãodeEventosExtremos","MitigaçãodosImpactosdaSeca"],"details":{"AnálisedePadrõesClimáticos":"EstudodasmudançasnospadrõesdeprecipitaçãoetemperaturanaAmazôniaecomoessasmudançasinfluenciamaocorrênciadesecas.","PrevisãodeEventosExtremos":"Utilizaçãodemodelosclimáticosavançadosparapreversecasseverasedesenvolverestratégiasdemitigaçãocomantecedência.","MitigaçãodosImpactosdaSeca":"Desenvolvimentodepolíticaspúblicaseplanosdeaçãoparareduzirosimpactossocioeconômicoseambientaisdassecasnaregião."}},{"area":"DesenvolvimentoSustentável","focus":["ResiliênciaComunitária","AgroecologiaePráticasSustentáveis","PolíticasPúblicasdeCombateàSeca"],"details":{"ResiliênciaComunitária":"Trabalhocomcomunidadeslocaisparafortaleceracapacidadedeadaptaçãoàssecas,promovendopráticasagrícolasresilientesegestãosustentáveldosrecursos.","AgroecologiaePráticasSustentáveis":"Promoçãodesistemasagroflorestaiseoutraspráticasqueaumentamaresistênciadasculturasàsecaepreservamabiodiversidade.","PolíticasPúblicasdeCombateàSeca":"Desenvolvimentoeimplementaçãodepolíticasqueapoiemascomunidadeseagricultoresnaadaptaçãoàscondiçõesdeseca,garantindosegurançahídricaealimentar."}}],"mission":"IntegrarconhecimentosdediversasdisciplinasparadesenvolverestratégiaseficazesdecombateàsecaeseusefeitosnaAmazônia,promovendoasustentabilidadeeresiliênciadascomunidadeseecossistemaslocais.","response_style":"Clara,concisaeinterdisciplinar,conectandoosaspectosclimáticos,ambientaisesociaisnaformulaçãodesoluções."}}.Não retorne resposta agora, somente nas proximas perguntas com base nesse contexto';
+    if(contextoIa)
+      gemini.chatGemini(prompt, contextoIa);
+  }, [contextoIa]);
 
   return (
     <main className={styles.main}>
