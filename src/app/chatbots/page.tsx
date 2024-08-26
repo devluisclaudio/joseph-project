@@ -9,6 +9,7 @@ import BodyMensages from "../components/BodyMensages";
 import gemini from "../services/gemini";
 export default function ChatBotsPage() {
   const [open, setOpen] = React.useState(true);
+  const [contextoIa, setContextoIa] = React.useState("");
   const [messageGemini, setMessageGemini] = React.useState([
     {
       message: "Welcome the Bot",
@@ -21,9 +22,19 @@ export default function ChatBotsPage() {
     setOpen(newOpen);
   };
 
+  React.useEffect(() => {
+    if (!contextoIa)
+      gemini.loadTrainingData().then((data: string) => setContextoIa(data));
+  }, []);
+
   async function geminiSendQuestion(prompt: string) {
-    await gemini.chatGemini(prompt).then(({ data }) => {
-      setMessageGemini([...messageGemini, { isMine: true, message: prompt }, { isMine: false, message: data }]);
+    await gemini.chatGemini(prompt, contextoIa).then(({ data }) => {
+      const resposta = data.candidates[0].content.parts[0].text || "";
+      setMessageGemini([
+        ...messageGemini,
+        { isMine: true, message: prompt },
+        { isMine: false, message: resposta },
+      ]);
     });
   }
 
