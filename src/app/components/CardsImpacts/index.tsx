@@ -1,4 +1,4 @@
-import { Card, CardContent, Typography } from "@mui/material";
+import { Card, CardContent, Typography, Box } from "@mui/material";
 import CardItemIpact from "../CardItemIpact";
 import imageSocioeconomic from "@/app/assets/socioeconimic.jpeg";
 import imageEnvironmental from "@/app/assets/environmental.jpg";
@@ -59,28 +59,64 @@ export default function CardsImpacts() {
   }, [dataSetGemini]);
 
   return (
-    <Card sx={{ minWidth: 475, maxWidth: 415, height: 345 }}>
-      <CardContent>
-        <Typography
-          variant="h5"
-          component="div"
-          sx={{
-            flexGrow: 1,
-            textAlign: "center",
-            paddingInline: 2,
-            fontSize: 20,
-            fontWeight: 600,
-            lineHeight: "29.05px",
-            color: "#4D4D4D",
-            marginBottom: 2,
-          }}
-        >
-          Impacts
-        </Typography>
-        {infos.map((item: any, index: number) => (
-          <CardItemIpact dataSet={item} key={index} />
-        ))}
-      </CardContent>
-    </Card>
+    <>
+      <Typography
+        variant="h3"
+        component="div"
+        sx={{
+          flexGrow: 1,
+          textAlign: "left",
+          paddingInline: 2,
+          fontSize: 20,
+          fontWeight: 600,
+          lineHeight: "29.05px",
+          color: "#4D4D4D",
+          marginBottom: 1
+        }}
+      >
+        Climate Change Impact on Different Areas
+      </Typography>
+      <Typography
+        variant="h6"
+        component="div"
+        sx={{
+          maxWidth: "700px",
+          margin: "0 auto",
+          flexGrow: 1,
+          textAlign: "left",
+          paddingInline: 2,
+          fontSize: 14,
+          fontWeight: 400,
+          lineHeight: "18.05px",
+          color: "#4D4D4D",
+          marginBottom: 2
+        }}
+      >
+        Climate change is having significant effects across various sectors. The logistics sector is the most impacted, with 46% of the total impact, followed by the environmental sector at 25%, and the socioeconomic sector at 13%. These impacts represent critical challenges that must be addressed to ensure a sustainable and resilient future for all affected areas.
+      </Typography>
+
+      <Card sx={{ minWidth: 475, maxWidth: 700, height: 270, margin: "0 auto", marginBottom: 2 }}>
+        <CardContent>
+          <Typography
+            variant="h5"
+            component="div"
+            sx={{
+              flexGrow: 1,
+              textAlign: "center",
+              paddingInline: 2,
+              fontSize: 20,
+              fontWeight: 600,
+              lineHeight: "29.05px",
+              color: "#4D4D4D",
+              marginBottom: 2,
+            }}
+          >
+          </Typography>
+          {infos.map((item: any, index: number) => (
+            <CardItemIpact dataSet={item} key={index} />
+          ))}
+        </CardContent>
+      </Card>
+    </>
   );
 }

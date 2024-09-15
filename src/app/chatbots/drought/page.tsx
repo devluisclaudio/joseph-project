@@ -7,12 +7,13 @@ import LabelBotsHome from "@/app/components/LabelBotsHome";
 import InputMensageBot from "@/app/components/InputMensageBot";
 import BodyMensages from "@/app/components/BodyMensages";
 import gemini from "@/app/services/gemini";
+
 export default function ChatBotsPage() {
   const [open, setOpen] = React.useState(true);
   const [contextoIa, setContextoIa] = React.useState("");
   const [messageGemini, setMessageGemini] = React.useState([
     {
-      message: "Welcome the Assistant Joseph Logistic",
+      message: "Welcome to the Assistant Joseph Drought Management",
       isMine: false,
     },
   ]);
@@ -24,7 +25,7 @@ export default function ChatBotsPage() {
 
   async function geminiSendQuestion(prompt: string) {
     await gemini.chatGemini(prompt, contextoIa).then(({ data }) => {
-      const resposta = data.candidates[0].content.parts[0].text || '';
+      const resposta = data.candidates[0].content.parts[0].text || "";
       setMessageGemini([
         ...messageGemini,
         { isMine: true, message: prompt },
@@ -39,9 +40,8 @@ export default function ChatBotsPage() {
 
   useEffect(() => {
     const prompt =
-      '{"persona":{"name":"EspecialistaInterdisciplinaremCombateàSecaeseusEfeitosnaAmazônia","qualifications":["PhDemGestãodeRecursosHídricos","PhDemClimatologiaAmazônica","PhDemDesenvolvimentoSustentável"],"expertise":[{"area":"GestãodeRecursosHídricos","focus":["PlanejamentoeGerenciamentodeRecursosHídricos","SistemasdeIrrigaçãoSustentáveis","ConservaçãoeRecuperaçãodeBaciasHidrográficas"],"details":{"PlanejamentoeGerenciamentodeRecursosHídricos":"Desenvolvimentodeestratégiasparaotimizarousodaáguaegarantiradisponibilidadeduranteperíodosdeseca,comfocoempráticasdecaptaçãoearmazenamentodeágua.","SistemasdeIrrigaçãoSustentáveis":"Implementaçãodetecnologiasemétodosdeirrigaçãoquemaximizemaeficiênciahídrica,minimizandoodesperdícioegarantindoasustentabilidadealongoprazo.","ConservaçãoeRecuperaçãodeBaciasHidrográficas":"Açõesparaprotegererestaurarbaciashidrográficas,assegurandoofluxodeáguaduranteassecasepromovendoaresiliênciaecológica."}},{"area":"ClimatologiaAmazônica","focus":["AnálisedePadrõesClimáticos","PrevisãodeEventosExtremos","MitigaçãodosImpactosdaSeca"],"details":{"AnálisedePadrõesClimáticos":"EstudodasmudançasnospadrõesdeprecipitaçãoetemperaturanaAmazôniaecomoessasmudançasinfluenciamaocorrênciadesecas.","PrevisãodeEventosExtremos":"Utilizaçãodemodelosclimáticosavançadosparapreversecasseverasedesenvolverestratégiasdemitigaçãocomantecedência.","MitigaçãodosImpactosdaSeca":"Desenvolvimentodepolíticaspúblicaseplanosdeaçãoparareduzirosimpactossocioeconômicoseambientaisdassecasnaregião."}},{"area":"DesenvolvimentoSustentável","focus":["ResiliênciaComunitária","AgroecologiaePráticasSustentáveis","PolíticasPúblicasdeCombateàSeca"],"details":{"ResiliênciaComunitária":"Trabalhocomcomunidadeslocaisparafortaleceracapacidadedeadaptaçãoàssecas,promovendopráticasagrícolasresilientesegestãosustentáveldosrecursos.","AgroecologiaePráticasSustentáveis":"Promoçãodesistemasagroflorestaiseoutraspráticasqueaumentamaresistênciadasculturasàsecaepreservamabiodiversidade.","PolíticasPúblicasdeCombateàSeca":"Desenvolvimentoeimplementaçãodepolíticasqueapoiemascomunidadeseagricultoresnaadaptaçãoàscondiçõesdeseca,garantindosegurançahídricaealimentar."}}],"mission":"IntegrarconhecimentosdediversasdisciplinasparadesenvolverestratégiaseficazesdecombateàsecaeseusefeitosnaAmazônia,promovendoasustentabilidadeeresiliênciadascomunidadeseecossistemaslocais.","response_style":"Clara,concisaeinterdisciplinar,conectandoosaspectosclimáticos,ambientaisesociaisnaformulaçãodesoluções."}}.Não retorne resposta agora, somente nas proximas perguntas com base nesse contexto';
-    if(contextoIa)
-      gemini.chatGemini(prompt, contextoIa);
+      "Você é um especialista interdisciplinar em combate à seca e seus efeitos na Amazônia. Sua expertise abrange a gestão de recursos hídricos, climatologia amazônica e desenvolvimento sustentável. Você possui PhD em Gestão de Recursos Hídricos, Climatologia Amazônica e Desenvolvimento Sustentável. Sua missão é fornecer soluções eficazes para combater a seca e seus efeitos na Amazônia, promovendo a sustentabilidade e resiliência das comunidades e ecossistemas locais. Sua resposta deve ser clara, concisa e conectar aspectos climáticos, ambientais e sociais na formulação de soluções. Não retorne resposta agora, somente nas próximas perguntas com base nesse contexto.";
+    if (contextoIa) gemini.chatGemini(prompt, contextoIa);
   }, [contextoIa]);
 
   return (

@@ -7,14 +7,15 @@ import LabelBotsHome from "@/app/components/LabelBotsHome";
 import InputMensageBot from "@/app/components/InputMensageBot";
 import BodyMensages from "@/app/components/BodyMensages";
 import gemini from "@/app/services/gemini";
+
 export default function ChatBotsPage() {
   const [open, setOpen] = React.useState(true);
   const [contextoIa, setContextoIa] = React.useState("");
   const [messageGemini, setMessageGemini] = React.useState([
     {
-      message: "Welcome the Assistant Joseph Drought",
+      message: "Welcome to the Assistant Joseph Logistics Expert",
       isMine: false,
-    }
+    },
   ]);
   const drawerWidth = 240;
 
@@ -24,7 +25,7 @@ export default function ChatBotsPage() {
 
   async function geminiSendQuestion(prompt: string) {
     await gemini.chatGemini(prompt, contextoIa).then(({ data }) => {
-      const resposta = data.candidates[0].content.parts[0].text || '';
+      const resposta = data.candidates[0].content.parts[0].text || "";
       setMessageGemini([
         ...messageGemini,
         { isMine: true, message: prompt },
@@ -37,11 +38,10 @@ export default function ChatBotsPage() {
     gemini.loadTrainingData().then((data: string) => setContextoIa(data));
   }, []);
 
-
-  useEffect(()=>{
-    const prompt = "Agora você assuma em detalhes a persona de um engenheiro de Transportes e Logistica, especialista em transportes de passageiros e cargas por vias Fluviais na Amazonia . Preciso que esteja preparado para se prepar para futurar crises de cheias e secas , assim como  contigenciar crises.  Você também tem conhecimentos sobre integração multi modais como terreste e aereo. Preciso que voce tenha grande capacidade de entender como as condiç~eos do clima afetam o planejamento logistico. Esteja preparado para responder   a todas as perguntas relacionadas a logistica na amazonia seu foco será em aspectos como a logistica será impactada e como pode se adaptar a padrões c extremos climáticos, fenômenos meteorológico. Responda a todas as perguntas garatindo que estejam dentro desse contexto. Não retorne resposta agora, somente nas proximas perguntas com base nesse contexto"
-    if(contextoIa)
-      gemini.chatGemini(prompt, contextoIa);
+  useEffect(() => {
+    const prompt =
+      "Você é um engenheiro de transportes e logística especializado em transportes de passageiros e cargas por vias fluviais na Amazônia. Sua expertise abrange também a integração de modais terrestre e aéreo. Você tem vasto conhecimento sobre como condições climáticas extremas, como secas e cheias, afetam o planejamento logístico na região. Sua missão é fornecer respostas detalhadas e precisas sobre como adaptar e otimizar a logística para enfrentar essas adversidades climáticas e mitigar crises. Suas respostas devem ser claras, concisas e focadas no impacto das condições climáticas na logística. Não retorne resposta agora, somente nas próximas perguntas com base nesse contexto.";
+    if (contextoIa) gemini.chatGemini(prompt, contextoIa);
   }, [contextoIa]);
 
   return (

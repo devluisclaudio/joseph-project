@@ -23,8 +23,8 @@ export default function CardsBots() {
           <Link href={item.link}>
             <Card
               sx={{
-                minWidth: 275,
-                maxWidth: 375,
+                minWidth: 165,
+                maxWidth: 265,
                 transition: "transform 0.15s ease-in-out, box-shadow 0.15s ease-in-out",
                 borderRadius: 1.5,
                 "&:hover": {

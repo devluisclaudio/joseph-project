@@ -113,6 +113,34 @@ const gemini = {
       return "";
     }
   },
+  getSolutionForNews: (newsContent: string) => {
+    const prompt = `The news below reports a predicted climate problem for the end of 2024. Based on this news, provide a solution or preventive method that could be applied to mitigate the impacts described:
+    
+    "${newsContent}"
+    
+    Respond with a paragraph describing the solution or preventive method.`;
+
+    return ia.post(
+      "",
+      {
+        contents: [
+          {
+            role: "user",
+            parts: [
+              {
+                text: prompt,
+              },
+            ],
+          },
+        ],
+      },
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+  },
 };
 
 export default gemini;
