@@ -2,7 +2,7 @@ import ia from "./ia";
 
 const gemini = {
   percentImpacts: (additionalContext: string) => {
-    const prompt = `simule que você é uma api e esta buscando índices de insegurança alimentar gerado por seca para revisões ( % da população não urbana passando fome) retorne os dados em formato de json com a chave percent e o valor do lado somente isso, sem mensagens de explicação na primeira posição. E na segunda posição do array a porcentagem de estimar inflação gerada pela seca no Amazonas. E na terceira posição do array a porcentagem de estimar impacto na navegação em secas passadas  ( de navios fretes fluviais e viagens impactadas)`;
+    const prompt = `Simule que você é uma api e esta buscando índices de insegurança alimentar gerado por seca para revisões ( % da população não urbana passando fome) retorne os dados em formato de json com a chave percent e o valor do lado somente isso, sem mensagens de explicação na primeira posição. E na segunda posição do array a porcentagem de estimar inflação gerada pela seca no Amazonas. E na terceira posição do array a porcentagem de estimar impacto na navegação em secas passadas  ( de navios fretes fluviais e viagens impactadas)`;
     return ia.post(
       "",
       {
@@ -33,7 +33,7 @@ const gemini = {
     );
   },
   newsGemini: (additionalContext: string) => {
-    const prompt = `como dados que voce tem na seu treinamento, retorne uma noticia prevista para o final de 2024 na amazonia em formato de html com titulo, subtitulo e um paragrafo resumido relacionando aos impactos na região traduzido para o ingles`;
+    const prompt = `Com os dados que você possui em seu treinamento, retorne uma notícia prevista para os anos futuros na amazonia em formato de html com titulo, subtitulo e um paragrafo resumido relacionando aos impactos na região traduzido para o inglês`;
     return ia.post(
       "",
       {
@@ -79,7 +79,7 @@ const gemini = {
           parts: [
             {
               text:
-                "Vamos conversar sobre mudanças climáticas na Amazônia e seus impactos na logística. " +
+                "Vamos conversar sobre mudanças climáticas na Amazônia" +
                 prompt,
             },
           ],
@@ -106,7 +106,7 @@ const gemini = {
       if (!response.ok) {
         throw new Error("Erro ao carregar o texto de treinamento da Jina AI.");
       }
-      const data = await response.text(); // Obtém a resposta como texto
+      const data = await response.text();
       return data || "";
     } catch (error) {
       console.error("Erro ao carregar o texto de treinamento:", error);
