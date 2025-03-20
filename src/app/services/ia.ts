@@ -1,8 +1,8 @@
 import axios from 'axios';
 
 const ia = axios.create({
-  baseURL: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyDzop80QZxc-8BdNWEqmGtG9DJWkExXySA',
-  timeout: 100000, 
+  baseURL: 'https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=AIzaSyCMyB2ks_Lh1S5h__NQRBF0LpFsOAibrqU',
+  timeout: 100000,
 });
 
 ia.interceptors.request.use(
@@ -14,4 +14,4 @@ ia.interceptors.request.use(
   }
 );
 
-export default ia
+export default ia; 
